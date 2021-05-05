@@ -1,3 +1,5 @@
+
+
 /*
 Description
 We're going to create a Pokemon Trading Cards show page. To achieve this, you'll use JS to dynamically create all the elements on the page!
@@ -27,3 +29,60 @@ See if you can find a way to toggle between the different images of each card! (
 // This variable has the data you're working with
 
 console.log(data);
+
+
+for (const pokemon of data){
+ console.log(pokemon.stats)
+ pokemonCard(pokemon)
+}
+function pokemonCard (pokemon) {
+let pokemonImg = pokemon.sprites.other['official-artwork'].front_default
+// article
+const article = document.createElement('article');
+article.className = 'card'
+
+// Section
+const section = document.querySelector('section')
+section.append(article)
+
+// title
+const title = document.createElement("h2");
+title.className = 'card--title';
+title.innerText = pokemon.name
+
+// img
+
+const img = document.createElement('img')
+img.className = 'card--img'
+img.src = pokemonImg
+// article.append(img)
+
+// card--text div
+const div = document.createElement('div')
+div.className = 'card--text'
+
+// div p tag
+
+for (const statObject of pokemon.stats) {
+   console.log(statObject)
+   let pokemonP = pokemonParagraph(statObject.stat.name, statObject.base_stat)
+   div.append(pokemonP)
+}
+
+
+
+article.append(title, img, div)
+
+
+}
+
+function pokemonParagraph(text, stat) {
+ const pEl1 = document.createElement('p')
+ // pEl1.className = ''
+ pEl1.innerText = `${text}: ${stat}`
+ return pEl1
+ }
+
+// console.log(section, article)
+
+pokemonCards()
